@@ -13,8 +13,8 @@ package lib_AnalisisNumerico.lib;
 * Posteriormente el metodo devuelve la matriz resuelta en un arreglo de tipo
 * flotante.
 */
-
- public native resolverMatriz float[] resolverMatriz(float[] matriz,int size);
+  public native float[] resolverMatriz(float[] matriz,int size);
+ 
 
 
 }
