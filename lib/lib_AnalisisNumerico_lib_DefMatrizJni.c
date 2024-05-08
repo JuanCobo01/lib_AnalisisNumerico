@@ -1,24 +1,40 @@
-#include<jni.h>
+
+#include <jni.h>
 /*
- * Class:     MatrizJni_lib_MatrizCalculator
+ * Class:     lib_AnalisisNumerico_lib_DefMatrizJni
  * Method:    resolverMatriz
  * Signature: ([FI)[F
  */
-JNIEXPORT jfloatArray JNICALL Java_MatrizJni_lib_MatrizCalculator_resolverMatriz
+JNIEXPORT jfloatArray JNICALL Java_lib_1AnalisisNumerico_lib_DefMatrizJni_resolverMatriz
   (JNIEnv * env, jobject obj, jfloatArray matriz, jint size){
+/*
+* Definicion de variables que usaremos para la aplicacion del algoritmo
+*/
 
-   float factor;
+
+
+  float factor;
    jsize len = (*env)->GetArrayLength(env, matriz);
+
 
    jfloat *matrizC = (*env)->GetFloatArrayElements(env, matriz, NULL);
 
+/*
+* Convertimos al arreglo en matriz
+*/
    float matriz2D[size][size+1];
+
+
 
    for (int i = 0; i < size; i++) {
         for (int j = 0; j <= size; j++) {
             matriz2D[i][j] = matrizC[i * (size + 1) + j];
         }
    }
+
+/*
+* Ciclos para la aplicacion del metodo de eliminacion hacia adelante de Gauss-Jordan
+*/
 
    for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
@@ -37,7 +53,11 @@ JNIEXPORT jfloatArray JNICALL Java_MatrizJni_lib_MatrizCalculator_resolverMatriz
             matriz2D[i][j] /= factor;
         }
     }
- 
+
+/*
+* Devolvemos el resultado en un jfloatArray con la matriz identidad y los resultados de las incognitas
+*/
+
  (*env)->ReleaseFloatArrayElements(env, matriz, matrizC, 0);
 
     jfloatArray resultado = (*env)->NewFloatArray(env, size * (size + 1));
