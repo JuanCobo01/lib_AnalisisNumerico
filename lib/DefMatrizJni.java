@@ -14,7 +14,7 @@ package lib_AnalisisNumerico.lib;
 * flotante.
 */
 
- public native float[] resolverMatriz(float[] matriz,int size);
+ public native resolverMatriz float[] resolverMatriz(float[] matriz,int size);
 
 
 }
